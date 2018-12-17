@@ -13,7 +13,14 @@ class DatabaseSeeder extends Seeder
     {
         Eloquent::unguard();
         
-        $this->call(UserTableSeeder::class);
+        // Just precaution because UserTableSeeder may not be included
+        //  for security reasons
+        try {
+            $this->call(UserTableSeeder::class);
+        } catch (Exception $e) {
+            
+        }
+        
         $this->call(PostTableSeeder::class);
     }
 }
