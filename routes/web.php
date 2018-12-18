@@ -20,6 +20,9 @@ Route::middleware('auth')->group(function() {
     Route::post('{id}/edit/save', 'PostController@editSave')->name('editSave');
     Route::post('{id}/delete', 'PostController@delete')->name('delete');
     
+    Route::get('change/password', 'UserController@password')->name('password');
+    Route::post('change/password/save', 'UserController@passwordSave')->name('passwordSave');
+    
 //    Route::middleware('auth:admin')->prefix('admin')->group(function() {
 //        //todo - admin menu
 //    });
