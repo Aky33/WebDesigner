@@ -10,10 +10,10 @@
                         <span class="h3">{{ $post->title }}</span>
                         <span class="" style="float: right">
                             <a href="{{ route('edit', ['id' => $post->id]) }}" style="margin-right: 5px">
-                                <img src="{{ public_path('images/edit.jpg') }}" alt="Edit" class="icon">
+                                <img src="{{ public_path('images/edit.jpg') }}" alt="Edit">
                             </a>
-                            <a href="{{ route('delete', ['id' => $post->id]) }}">
-                                <img src="{{ public_path('images/delete.jpg') }}" alt="Delete" class="icon">
+                            <a>
+                                <input type="image" form="delete{{ $post->id }}" src="{{ public_path('images/delete.jpg') }}" alt="Delete">                            
                             </a>
                         </span>
                     </div>
@@ -22,6 +22,10 @@
                         <p>{{ $post->content }}</p>
                     </div>
                 </div>
+            
+                {{ Form::open(['action' => ['PostController@delete', $post->id], 'id' => 'delete'.$post->id]) }}
+                {{ Form::token() }}
+                {{ Form::close() }}
             @endforeach
         </div>
     </div>
