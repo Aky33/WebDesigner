@@ -10,10 +10,10 @@
                         <span class="h3">{{ $post->title }}</span>
                         <span class="" style="float: right">
                             <a href="{{ route('edit', ['id' => $post->id]) }}" style="margin-right: 5px">
-                                <img src="{{ public_path('images/edit.jpg') }}" alt="Edit">
+                                <img src="{{ public_path('images/editIcon.png') }}" alt="Edit">
                             </a>
                             <a>
-                                <input type="image" form="delete{{ $post->id }}" src="{{ public_path('images/delete.jpg') }}" alt="Delete">                            
+                                <input type="image" form="delete{{ $post->id }}" src="{{ public_path('images/deleteIcon.png') }}" alt="Delete">                            
                             </a>
                         </span>
                     </div>

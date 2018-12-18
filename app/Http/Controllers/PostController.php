@@ -2,19 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    private $posts;
-    
-    public function __construct() {
-        $this->posts = Post::all();
-    }
-
     public function index() {
-        $posts = $this->posts->sortByDesc('id');
+        $posts = \DB::table('posts')->get()->sortByDesc('id');
         
         return view('home', compact('posts'));
     }
@@ -29,11 +22,11 @@ class PostController extends Controller
             'content' => ['required', 'string', 'max:255'],
         ]);
         
-        $post = new Post;
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->save();
-        
+        \DB::table('posts')->insert([
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+
         return redirect()->route('home');
     }
     
@@ -42,7 +35,7 @@ class PostController extends Controller
             'id' => ['numeric', 'exists: posts, id'],
         ]);
         
-        $post = $this->posts->find($request->id);
+        $post = \DB::table('posts')->find($request->id);
         
         return view('edit', compact('post'));
     }
@@ -54,7 +47,7 @@ class PostController extends Controller
             'content' => ['required', 'string', 'max: 255'],
         ]);
         
-        $this->posts->find($request->id)->update([
+        \DB::table('posts')->where('id', $request->id)->update([
             'title' => $request->title,
             'content' => $request->content,
         ]);
@@ -67,7 +60,7 @@ class PostController extends Controller
             'id' => ['numeric', 'exists: posts, id'],
         ]);
         
-        $this->posts->find($request->id)->delete();
+        \DB::table('posts')->where('id', $request->id)->delete();
         
         return redirect()->route('home');
     }
