@@ -23,7 +23,12 @@ Route::middleware('auth')->group(function() {
     Route::get('change/password', 'UserController@password')->name('password');
     Route::post('change/password/save', 'UserController@passwordSave')->name('passwordSave');
     
-//    Route::middleware('auth:admin')->prefix('admin')->group(function() {
-//        //todo - admin menu
-//    });
+    Route::prefix('admin')->group(function() {
+        Route::get('/', 'AdminController@index')->name('admin');
+        Route::get('create', 'AdminController@create')->name('createUser');
+        Route::post('create/save', 'AdminController@createSave')->name('createSaveUser');
+        Route::post('{id}/privilegia', 'AdminController@changePrivilegia')->name('changePrivilegia');
+        Route::post('{id}/password', 'AdminController@resetPassword')->name('resetPassword');
+        Route::post('{id}/delete', 'AdminController@delete')->name('deleteUser');
+    });
 });

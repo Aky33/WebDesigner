@@ -19,7 +19,7 @@ class UserController extends Controller
         
         $request->validate([
             'oldPassword' => ['required', 'string'],
-            'newPassword' => ['required', 'string', 'min: 8', 'confirmed'],
+            'newPassword' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
         
         \DB::table('users')->where('id', \Auth::id())->update([

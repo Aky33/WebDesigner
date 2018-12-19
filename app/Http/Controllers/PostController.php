@@ -32,7 +32,7 @@ class PostController extends Controller
     
     public function edit(Request $request) {
         $request->validate([
-            'id' => ['numeric', 'exists: posts, id'],
+            'id' => ['numeric', 'exists:posts,id'],
         ]);
         
         $post = \DB::table('posts')->find($request->id);
@@ -42,9 +42,9 @@ class PostController extends Controller
     
     public function editSave(Request $request) {
         $request->validate([
-            'id' => ['numeric', 'exists: posts, id'],
-            'title' => ['required', 'string', 'max: 255'],
-            'content' => ['required', 'string', 'max: 255'],
+            'id' => ['numeric', 'exists:posts,id'],
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'string', 'max:255'],
         ]);
         
         \DB::table('posts')->where('id', $request->id)->update([
@@ -57,7 +57,7 @@ class PostController extends Controller
     
     public function delete(Request $request) {
         $request->validate([
-            'id' => ['numeric', 'exists: posts, id'],
+            'id' => ['numeric', 'exists:posts,id'],
         ]);
         
         \DB::table('posts')->where('id', $request->id)->delete();

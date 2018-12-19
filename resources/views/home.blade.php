@@ -8,12 +8,12 @@
                 <div class="card" style="margin-bottom: 25px">
                     <div class="card-header">
                         <span class="h3">{{ $post->title }}</span>
-                        <span class="" style="float: right">
+                        <span class="row" style="float: right">
                             <a href="{{ route('edit', ['id' => $post->id]) }}" style="margin-right: 5px">
-                                <img src="{{ public_path('images/editIcon.png') }}" alt="Edit">
+                                <img src="{{ asset('images/editIcon.png') }}" alt="Edit" class="icon">
                             </a>
-                            <a>
-                                <input type="image" form="delete{{ $post->id }}" src="{{ public_path('images/deleteIcon.png') }}" alt="Delete">                            
+                            <a style="margin-right: 10px">
+                                <input type="image" form="delete{{ $post->id }}" src="{{ asset('images/deleteIcon.png') }}" alt="Delete" class="icon">                            
                             </a>
                         </span>
                     </div>

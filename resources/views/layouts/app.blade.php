@@ -36,7 +36,10 @@
                     <ul class="navbar-nav mr-auto">
                         @guest
                         @else
-                            <li class="nav-item"><a class="nav-link" href="{{ route('create') }}">Nová aktualita</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('create') }}">New actuality</a></li>
+                            @if (\Auth::user()->admin)
+                                <li class="nav-item"><a class="nav-link" href="{{ route('admin') }}">Admin section</a></li>
+                            @endif
                         @endguest
                     </ul>
 
