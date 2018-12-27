@@ -27,13 +27,14 @@ class AdminController extends Controller
         else
             $admin = false;
         
+        $password = $this->generatePassword();
         \DB::table('users')->insert([
             'name' => $request->name,
-            'password' => \Hash::make($this->generatePassword()),
+            'password' => \Hash::make($password),
             'admin' => $admin,
         ]);
         
-        return redirect('admin')->with('success', 'User created.');
+        return redirect('admin')->with('success', trans('messages.userCreated').$password);
     }
     
     public function changePrivilegia(Request $request) {
@@ -50,7 +51,7 @@ class AdminController extends Controller
             'admin' => $ans,
         ]);
         
-        return redirect()->back()->with('success', 'Privilegia changed.');
+        return redirect()->back()->with('success', trans('messages.privilegiaChanged'));
     }
     
     public function resetPassword(Request $request) {
@@ -64,7 +65,7 @@ class AdminController extends Controller
             'password' => \Hash::make($password),
         ]);
         
-        return redirect()->back()->with('success', 'Password resetted to: '.$password);
+        return redirect()->back()->with('success', trans('messages.passwordReset').$password);
     }
     
     public function delete(Request $request) {
@@ -74,12 +75,10 @@ class AdminController extends Controller
         
         \DB::table('users')->where('id', $request->id)->delete();
         
-        return redirect()->back()->with('success', 'User deleted.');
+        return redirect()->back()->with('success', trans('messages.userDeleted'));
     }
     
     private function generatePassword() {
-        //todo - generate random password
-        
-        return "pass123";
+        return str_random(5);
     }
 }

@@ -9,22 +9,22 @@
             
                 <div class="card" style="margin-bottom: 25px">
                     <div class="card-header">
-                        {{ __('Create user') }}
+                        {{ trans('headers.createUser') }}
                     </div>
                     
                     <div class="card-body">
                         <div class="form-group">
-                            {{ Form::label('name', 'Username:') }}
+                            {{ Form::label('name', trans('forms.username')) }}
                             {{ Form::text('name', null, ['class' => 'form-control']) }}
                         </div>
                         <div class="form-group">
-                            {{ Form::label('admin', 'Admin privilegia:') }}
+                            {{ Form::label('admin', trans('forms.admin')) }}
                             {{ Form::select('admin', [0 => 'User', 1 => 'Admin'], 0, ['class' => 'form-control']) }}
                         </div>
                     </div>
                     
                     <div class="card-footer">
-                        {{ Form::submit('Submit', ['class' => 'btn-action form-control']) }}
+                        {{ Form::submit(trans('forms.submit'), ['class' => 'btn-action form-control']) }}
                     </div>
                 </div>
             {{ Form::close() }}

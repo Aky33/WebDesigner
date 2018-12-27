@@ -9,26 +9,26 @@
             
                 <div class="card" style="margin-bottom: 25px">
                     <div class="card-header">
-                        {{ __('Password change') }}
+                        {{ trans('headers.password') }}
                     </div>
                     
                     <div class="card-body">
                         <div class="form-group">
-                            {{ Form::label('oldPassword', 'Old Password:') }}
+                            {{ Form::label('oldPassword', trans('forms.oldPassword')) }}
                             {{ Form::password('oldPassword', ['class' => 'form-control']) }}
                         </div>
                         <div class="form-group">
-                            {{ Form::label('newPassword', 'New Password:') }}
+                            {{ Form::label('newPassword', trans('forms.newPassword')) }}
                             {{ Form::password('newPassword', ['class' => 'form-control']) }}
                         </div>
                         <div class="form-group">
-                            {{ Form::label('newPassword_confirmation', 'New Password:') }}
+                            {{ Form::label('newPassword_confirmation', trans('forms.newPassword')) }}
                             {{ Form::password('newPassword_confirmation', ['class' => 'form-control']) }}
                         </div>
                     </div>
                     
                     <div class="card-footer">
-                        {{ Form::submit('Submit', ['class' => 'btn-action form-control']) }}
+                        {{ Form::submit(trans('forms.submit'), ['class' => 'btn-action form-control']) }}
                     </div>
                 </div>
             {{ Form::close() }}

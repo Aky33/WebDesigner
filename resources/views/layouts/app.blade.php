@@ -36,9 +36,9 @@
                     <ul class="navbar-nav mr-auto">
                         @guest
                         @else
-                            <li class="nav-item"><a class="nav-link" href="{{ route('create') }}">New actuality</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('create') }}">{{ trans('nav.newActuality') }}</a></li>
                             @if (\Auth::user()->admin)
-                                <li class="nav-item"><a class="nav-link" href="{{ route('admin') }}">Admin section</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('admin') }}">{{ trans('nav.admin') }}</a></li>
                             @endif
                         @endguest
                     </ul>
@@ -54,11 +54,16 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('password') }}">Password change</a>
+                                    <a class="dropdown-item" href="{{ route('lang') }}">
+                                        {{ trans('nav.lang') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('password') }}">
+                                        {{ trans('nav.password') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ trans('nav.logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

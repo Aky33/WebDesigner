@@ -14,7 +14,7 @@ class UserController extends Controller
         if (!(\Hash::check($request->oldPassword, \Auth::user()->password))) {
             return redirect()
                     ->back()
-                    ->with("error", "Your current password does not matches with the password you provided. Please try again.");
+                    ->with("error", trans('messages.passwordWrong'));
         }
         
         $request->validate([
@@ -26,6 +26,20 @@ class UserController extends Controller
             'password' => \Hash::make($request->newPassword),
         ]);
         
-        return redirect()->back()->with("success","Password changed successfully !");
+        return redirect()->back()->with("success", trans('messages.passwordChanged'));
+    }
+    
+    public function lang() {
+        $locales = \Config::get('app.locales');
+        return view('change.language', compact('locales'));
+    }
+    
+    public function langSelect(Request $request) {
+        $request->validate([
+            'locale' => ['in:'.implode(',', \Config::get('app.locales'))],
+        ]);
+        
+        \Session::put('locale', $request->locale);
+        return redirect()->back()->with('success', trans('messages.langChanged'));
     }
 }

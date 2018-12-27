@@ -18,7 +18,7 @@
                     </div>
                     
                     <div class="card-footer">
-                        {{ Form::submit('Submit', ['class' => 'btn-action form-control']) }}
+                        {{ Form::submit(trans('forms.submit'), ['class' => 'btn-action form-control']) }}
                     </div>
                 </div>
             {{ Form::close() }}

@@ -9,15 +9,15 @@
             
                 <div class="card" style="margin-bottom: 25px">
                     <div class="card-header">
-                        {{ Form::text('title', 'Title', ['class' => 'form-control']) }}
+                        {{ Form::text('title', null, ['class' => 'form-control', 'placeholder' => trans('forms.title')]) }}
                     </div>
                     
                     <div class="card-body">
-                        {{ Form::textarea('content', 'Content', ['class' => 'form-control']) }}
+                        {{ Form::textarea('content', null, ['class' => 'form-control', 'placeholder' => trans('forms.content')]) }}
                     </div>
                     
                     <div class="card-footer">
-                        {{ Form::submit('Submit', ['class' => 'btn-action form-control']) }}
+                        {{ Form::submit(trans('forms.submit'), ['class' => 'btn-action form-control']) }}
                     </div>
                 </div>
             {{ Form::close() }}

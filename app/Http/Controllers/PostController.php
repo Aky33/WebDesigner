@@ -27,7 +27,7 @@ class PostController extends Controller
             'content' => $request->content,
         ]);
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', trans('messages.postCreated'));
     }
     
     public function edit(Request $request) {
@@ -52,7 +52,7 @@ class PostController extends Controller
             'content' => $request->content,
         ]);
         
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', trans('messages.postEdited'));
     }
     
     public function delete(Request $request) {
@@ -62,6 +62,6 @@ class PostController extends Controller
         
         \DB::table('posts')->where('id', $request->id)->delete();
         
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', trans('messages.postDeleted'));
     }
 }
