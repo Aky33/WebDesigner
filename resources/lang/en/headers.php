@@ -6,4 +6,5 @@ return [
     'users' => 'Users',
     'createUser' => 'Create user',
     'language' => 'Languages',
+    'action' => 'Actions'
 ];

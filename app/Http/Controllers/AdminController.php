@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -9,11 +10,11 @@ class AdminController extends Controller
     public function index() {
         $users = \DB::table('users')->where('id', '<>', \Auth::id())->get();
         
-        return view('admin', compact('users'));
+        return view('admin.home', compact('users'));
     }
     
     public function create() {
-        return view('admin/create');
+        return view('admin.create');
     }
     
     public function createSave(Request $request) {
@@ -28,13 +29,14 @@ class AdminController extends Controller
             $admin = false;
         
         $password = $this->generatePassword();
-        \DB::table('users')->insert([
-            'name' => $request->name,
-            'password' => \Hash::make($password),
-            'admin' => $admin,
-        ]);
         
-        return redirect('admin')->with('success', trans('messages.userCreated').$password);
+        $user = new User;
+        $user->name = $request->name;
+        $user->password = \Hash::make($password);
+        $user->admin = $admin;
+        $user->save();
+        
+        return redirect()->route('admin.home')->with('success', trans('messages.userCreated').$password);
     }
     
     public function changePrivilegia(Request $request) {
@@ -47,9 +49,9 @@ class AdminController extends Controller
         else
             $ans = true;
         
-        \DB::table('users')->where('id', $request->id)->update([
-            'admin' => $ans,
-        ]);
+        $user = User::find($request->id);
+        $user->admin = $ans;
+        $user->save();
         
         return redirect()->back()->with('success', trans('messages.privilegiaChanged'));
     }
@@ -61,9 +63,9 @@ class AdminController extends Controller
         
         $password = $this->generatePassword();
         
-        \DB::table('users')->where('id', $request->id)->update([
-            'password' => \Hash::make($password),
-        ]);
+        $user = User::find($request->id);
+        $user->password = \Hash::make($password);
+        $user->save();
         
         return redirect()->back()->with('success', trans('messages.passwordReset').$password);
     }
@@ -73,7 +75,7 @@ class AdminController extends Controller
             'id' => ['numeric', 'exists:users,id'],
         ]);
         
-        \DB::table('users')->where('id', $request->id)->delete();
+        User::find($request->id)->delete();
         
         return redirect()->back()->with('success', trans('messages.userDeleted'));
     }

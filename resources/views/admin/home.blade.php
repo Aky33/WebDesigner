@@ -8,7 +8,7 @@
                 <div class="card-header">
                     <span class="h3">{{ trans('headers.users') }}</span>
                     <span class="" style="float: right">
-                        <a href="{{ route('createUser') }}" style="margin-right: 5px">
+                        <a href="{{ route('admin.create') }}" style="margin-right: 5px">
                             <img src="{{ asset('images/personIcon.png') }}" alt="Create" class="icon">
                         </a>
                     </span>

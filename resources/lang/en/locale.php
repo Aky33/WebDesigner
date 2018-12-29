@@ -12,4 +12,6 @@ return [
     'giveAdmin' => 'Give admin',
     'resetPassword' => 'Reset password',
     'delete' => 'Delete',
+    
+    'newActuality' => 'New actuality',
 ];

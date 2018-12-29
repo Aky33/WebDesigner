@@ -6,4 +6,5 @@ return [
     'users' => 'Uživatelé',
     'createUser' => 'Vytvořit uživatele',
     'language' => 'Jazyky',
+    'action' => 'Akce',
 ];

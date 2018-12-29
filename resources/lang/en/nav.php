@@ -1,8 +1,9 @@
 <?php
 
 return [
-    'newActuality' => 'New actuality',
+    'posts' => 'Posts',
     'admin' => 'Admin section',
+    
     'lang' => 'Language change',
     'password' => 'Password change',
     'logout' => 'Logout',

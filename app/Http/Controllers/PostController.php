@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -9,11 +10,11 @@ class PostController extends Controller
     public function index() {
         $posts = \DB::table('posts')->get()->sortByDesc('id');
         
-        return view('home', compact('posts'));
+        return view('posts.home', compact('posts'));
     }
     
     public function create() {
-        return view('create');
+        return view('posts.create');
     }
     
     public function createSave(Request $request) {
@@ -22,12 +23,12 @@ class PostController extends Controller
             'content' => ['required', 'string', 'max:255'],
         ]);
         
-        \DB::table('posts')->insert([
-            'title' => $request->title,
-            'content' => $request->content,
-        ]);
+        $post = new Post;
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->save();
 
-        return redirect()->route('home')->with('success', trans('messages.postCreated'));
+        return redirect()->route('posts.home')->with('success', trans('messages.postCreated'));
     }
     
     public function edit(Request $request) {
@@ -35,9 +36,9 @@ class PostController extends Controller
             'id' => ['numeric', 'exists:posts,id'],
         ]);
         
-        $post = \DB::table('posts')->find($request->id);
+        $post = Post::find($request->id);
         
-        return view('edit', compact('post'));
+        return view('posts.edit', compact('post'));
     }
     
     public function editSave(Request $request) {
@@ -47,12 +48,12 @@ class PostController extends Controller
             'content' => ['required', 'string', 'max:255'],
         ]);
         
-        \DB::table('posts')->where('id', $request->id)->update([
-            'title' => $request->title,
-            'content' => $request->content,
-        ]);
+        $post = Post::find($request->id);
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->save();
         
-        return redirect()->route('home')->with('success', trans('messages.postEdited'));
+        return redirect()->route('posts.home')->with('success', trans('messages.postEdited'));
     }
     
     public function delete(Request $request) {
@@ -60,8 +61,8 @@ class PostController extends Controller
             'id' => ['numeric', 'exists:posts,id'],
         ]);
         
-        \DB::table('posts')->where('id', $request->id)->delete();
+        Post::find($request->id)->delete();
         
-        return redirect()->route('home')->with('success', trans('messages.postDeleted'));
+        return redirect()->route('posts.home')->with('success', trans('messages.postDeleted'));
     }
 }

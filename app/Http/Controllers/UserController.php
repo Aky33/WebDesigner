@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function password() {
-        return view('change/password');
+        return view('options.password');
     }
     
     public function passwordSave(Request $request) {
@@ -22,16 +23,16 @@ class UserController extends Controller
             'newPassword' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
         
-        \DB::table('users')->where('id', \Auth::id())->update([
-            'password' => \Hash::make($request->newPassword),
-        ]);
+        $user = User::find(\Auth::id());
+        $user->password = \Hash::make($request->newPassword);
+        $user->save();
         
         return redirect()->back()->with("success", trans('messages.passwordChanged'));
     }
     
     public function lang() {
         $locales = \Config::get('app.locales');
-        return view('change.language', compact('locales'));
+        return view('options.language', compact('locales'));
     }
     
     public function langSelect(Request $request) {

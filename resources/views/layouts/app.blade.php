@@ -36,9 +36,9 @@
                     <ul class="navbar-nav mr-auto">
                         @guest
                         @else
-                            <li class="nav-item"><a class="nav-link" href="{{ route('create') }}">{{ trans('nav.newActuality') }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('posts.home') }}">{{ trans('nav.posts') }}</a></li>
                             @if (\Auth::user()->admin)
-                                <li class="nav-item"><a class="nav-link" href="{{ route('admin') }}">{{ trans('nav.admin') }}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('admin.home') }}">{{ trans('nav.admin') }}</a></li>
                             @endif
                         @endguest
                     </ul>
@@ -54,10 +54,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('lang') }}">
+                                    <a class="dropdown-item" href="{{ route('options.lang') }}">
                                         {{ trans('nav.lang') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('password') }}">
+                                    <a class="dropdown-item" href="{{ route('options.password') }}">
                                         {{ trans('nav.password') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"

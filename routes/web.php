@@ -13,24 +13,32 @@
 
 Auth::routes();
 Route::middleware('auth')->group(function() {
-    Route::get('/', 'PostController@index')->name('home');
-    Route::get('create', 'PostController@create')->name('create');
-    Route::post('create/save', 'PostController@createSave')->name('createSave');
-    Route::get('{id}/edit', 'PostController@edit')->name('edit');
-    Route::post('{id}/edit/save', 'PostController@editSave')->name('editSave');
-    Route::post('{id}/delete', 'PostController@delete')->name('delete');
+    Route::get('/', function() {
+        return redirect()->route('posts.home');
+    })->name('home');
     
-    Route::get('change/password', 'UserController@password')->name('password');
-    Route::post('change/password/save', 'UserController@passwordSave')->name('passwordSave');
-    Route::get('change/lang', 'UserController@lang')->name('lang');
-    Route::get('change/lang/{locale}', 'UserController@langSelect')->name('langSelect');
+    Route::prefix('posts')->name('posts.')->group(function() {
+        Route::get('/', 'PostController@index')->name('home');
+        Route::get('create', 'PostController@create')->name('create');
+        Route::post('create/save', 'PostController@createSave');
+        Route::get('{id}/edit', 'PostController@edit')->name('edit');
+        Route::post('{id}/edit/save', 'PostController@editSave');
+        Route::post('{id}/delete', 'PostController@delete');
+    });
     
-    Route::prefix('admin')->group(function() {
-        Route::get('/', 'AdminController@index')->name('admin');
-        Route::get('create', 'AdminController@create')->name('createUser');
-        Route::post('create/save', 'AdminController@createSave')->name('createSaveUser');
-        Route::post('{id}/privilegia', 'AdminController@changePrivilegia')->name('changePrivilegia');
-        Route::post('{id}/password', 'AdminController@resetPassword')->name('resetPassword');
-        Route::post('{id}/delete', 'AdminController@delete')->name('deleteUser');
+    Route::prefix('options')->name('options.')->group(function() {
+        Route::get('password', 'UserController@password')->name('password');
+        Route::post('password/save', 'UserController@passwordSave');
+        Route::get('lang', 'UserController@lang')->name('lang');
+        Route::get('lang/{locale}', 'UserController@langSelect')->name('lang.select');
+    });
+    
+    Route::prefix('admin')->name('admin.')->group(function() {
+        Route::get('/', 'AdminController@index')->name('home');
+        Route::get('create', 'AdminController@create')->name('create');
+        Route::post('create/save', 'AdminController@createSave');
+        Route::post('{id}/privilegia', 'AdminController@changePrivilegia');
+        Route::post('{id}/password', 'AdminController@resetPassword');
+        Route::post('{id}/delete', 'AdminController@delete');
     });
 });

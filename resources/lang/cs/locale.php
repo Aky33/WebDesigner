@@ -12,4 +12,6 @@ return [
     'giveAdmin' => 'Přidat admina',
     'resetPassword' => 'Obnovit heslo',
     'delete' => 'Smazat',
+    
+    'newActuality' => 'Nová aktualita',
 ];
