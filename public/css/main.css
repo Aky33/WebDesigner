@@ -26,3 +26,7 @@ and open the template in the editor.
     border: #e6e6e6 medium solid;
     color: black;
 }
+
+.btn-menu {
+    width: 100%;
+}

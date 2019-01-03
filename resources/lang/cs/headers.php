@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'menu' => 'Menu',
     'login' => 'Přihlášení',
     'password' => 'Změna hesla',
     'users' => 'Uživatelé',

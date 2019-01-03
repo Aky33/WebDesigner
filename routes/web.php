@@ -14,7 +14,7 @@
 Auth::routes();
 Route::middleware('auth')->group(function() {
     Route::get('/', function() {
-        return redirect()->route('posts.home');
+        return view('home');
     })->name('home');
     
     Route::prefix('posts')->name('posts.')->group(function() {
@@ -24,6 +24,13 @@ Route::middleware('auth')->group(function() {
         Route::get('{id}/edit', 'PostController@edit')->name('edit');
         Route::post('{id}/edit/save', 'PostController@editSave');
         Route::post('{id}/delete', 'PostController@delete');
+    });
+    
+    Route::prefix('pics')->name('pics.')->group(function() {
+        Route::get('/', 'ImageController@index')->name('home');
+        Route::get('create', 'ImageController@create')->name('create');
+        Route::post('create/save', 'ImageController@createSave');
+        Route::post('{file}/delete', 'ImageController@delete');
     });
     
     Route::prefix('options')->name('options.')->group(function() {

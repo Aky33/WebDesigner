@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'menu' => 'Menu',
     'login' => 'Login',
     'password' => 'Change password',
     'users' => 'Users',
