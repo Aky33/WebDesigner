@@ -21,20 +21,20 @@
             @foreach($files as $file)
                 <div class="card" style="margin-bottom: 25px">
                     <div class="card-header">
-                        <span class="h3">{{ $file }}</span>
+                        <span class="h3">{{ $file->name }}</span>
                         <span class="row" style="float: right">
                             <a style="margin-right: 10px">
-                                <input type="image" form="{{ $file }}" src="{{ asset('images/deleteIcon.png') }}" alt="Delete" class="icon">                            
+                                <input type="image" form="{{ $file->id }}" src="{{ asset('images/deleteIcon.png') }}" alt="Delete" class="icon">                            
                             </a>
                         </span>
                     </div>
                     
                     <div class="card-body">
-                        <img src="{{ \Storage::url("app/".$dir."/".$file) }}" alt="image">
+                        <img class="image" src="{{ asset(\Storage::url($file->path)) }}" alt="image">
                     </div>
                 </div>
             
-                {{ Form::open(['action' => ['ImageController@delete', $file], 'id' => $file]) }}
+                {{ Form::open(['action' => ['ImageController@delete', $file->id], 'id' => $file->id]) }}
                 {{ Form::token() }}
                 {{ Form::close() }}
             @endforeach

@@ -4,22 +4,18 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            {{ Form::open(['action' => 'AdminController@createSave']) }}
+            {{ Form::open(['action' => 'ImageController@createSave', 'files' => true]) }}
                 {{ Form::token() }}
             
                 <div class="card" style="margin-bottom: 25px">
                     <div class="card-header">
-                        {{ trans('headers.createUser') }}
+                        {{ trans('headers.createImage') }}
                     </div>
                     
                     <div class="card-body">
                         <div class="form-group">
-                            {{ Form::label('name', trans('forms.username')) }}
-                            {{ Form::text('name', null, ['class' => 'form-control']) }}
-                        </div>
-                        <div class="form-group">
-                            {{ Form::label('admin', trans('forms.admin')) }}
-                            {{ Form::select('admin', [0 => 'User', 1 => 'Admin'], 0, ['class' => 'form-control']) }}
+                            {{ Form::label('image', trans('forms.imageUpload')) }}
+                            {{ Form::file('image', ['class' => 'form-control-file border']) }}
                         </div>
                     </div>
                     

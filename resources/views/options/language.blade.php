@@ -10,10 +10,10 @@
                     </div>
                     
                     <div class="card-body">
-                        <a href="{{ route('lang.select', ['locale' => 'cs']) }}">
+                        <a href="{{ route('options.lang.select', ['locale' => 'cs']) }}">
                             {{ trans('langs.czech') }}
                         </a>
-                        <a href="{{ route('lang.select', ['locale' => 'en']) }}">
+                        <a href="{{ route('options.lang.select', ['locale' => 'en']) }}">
                             {{ trans('langs.english') }}
                         </a>
                     </div>

@@ -30,3 +30,12 @@ and open the template in the editor.
 .btn-menu {
     width: 100%;
 }
+
+.margin-bottom {
+    margin-bottom: 10px;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+}

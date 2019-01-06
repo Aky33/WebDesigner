@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function() {
         Route::get('/', 'ImageController@index')->name('home');
         Route::get('create', 'ImageController@create')->name('create');
         Route::post('create/save', 'ImageController@createSave');
-        Route::post('{file}/delete', 'ImageController@delete');
+        Route::post('{id}/delete', 'ImageController@delete');
     });
     
     Route::prefix('options')->name('options.')->group(function() {

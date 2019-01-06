@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="card-body">
-                    <div>
+                    <div class="margin-bottom">
                         <a href="{{ route('posts.home') }}">
                             <button class="btn btn-action btn-menu">
                                 <h4>{{ trans('nav.posts') }}</h4>

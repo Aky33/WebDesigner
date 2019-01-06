@@ -2,40 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use App\Image;
+
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
-    private $DIR = "uploads";
+    private $DIR = "public";
     
     public function index() {
-        //todo - rewrite for db use
-        
-        $files = \Storage::files($this->DIR);
-        $dir = $this->DIR;
-        
-        for($i = 0; $i < count($files); $i++) {
-            $string = explode('/', $files[$i]);
-            $files[$i] = $string[count($string)-1];
-        }
-
-        return view('pics.home', compact('files', 'dir'));
+        $files = \DB::table('images')->get();
+        return view('pics.home', compact('files'));
     }
     
     public function create() {
         return view('pics.create');
     }
     
-    public function createSave(Response $response) {
-        //todo - validation
+    public function createSave(Request $request) {
+        $request->validate([
+            'image' => ['file', 'required', 'mimes:jpg,jpeg,bmp,png']
+        ]);
         
+        $name = $request->file('image')->getClientOriginalName();
+        $path = $request->file('image')->store($this->DIR);
         
+        $image = new Image;
+        $image->name = $name;
+        $image->path = $path;
+        $image->save();
+        
+        return redirect()->route('pics.home')->with('success', trans('massages.imageCreated'));
     }
     
     public function delete(Request $request) {
-        //todo - validation, rewrite for db use
+        $request->validate([
+            'id' => ['numeric', 'exists:images,id']
+        ]);
         
-        \Storage::delete($this->DIR."/".$request->file);
+        $image = Image::find($request->id);
+        \Storage::delete($image->path);
+        $image->delete();
+
         return redirect()->back()->with('success', trans('messages.imageDeleted'));
     }
 }
